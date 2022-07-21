@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block titulo %}Lista de Libros{% endblock %}
+
+{% block contenido %}
+    <div class="card">
+        <div class="card-header">
+            <a type="button" class="btn btn-success" href="{% url 'crear' %}">Agregar Nuevo Libro</a>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">Libros</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Funciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for libro in libros %}
+                    <tr>
+                        <th scope="row">{{ libro.id }}</th>
+                        <td>{{ libro.titulo }}</td>
+                        <td>
+                            <img src="{{ libro.imagen.url }}" height="100">
+                        </td>
+                        <td>{{ libro.descripcion }}</td>
+                        <td>
+                            <a type="button" class="btn btn-info" href="{% url 'editar' libro.id %}">Editar</a> |
+                            <a type="button" class="btn btn-danger" href="{% url 'eliminar' libro.id %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer text-muted">
+            Footer
+        </div>
+    </div>
+{% endblock %}
